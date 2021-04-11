@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.project.backend.entities.Order;
 import com.project.backend.entities.Product;
@@ -18,9 +17,18 @@ public class OrderItemPK implements Serializable {
 	@ManyToOne
 	@JoinColumn(name= "order_id")
 	private Order order;
+	
 	@ManyToOne
 	@JoinColumn(name="product_id")
 	private Product product;
+	
+	public OrderItemPK() {}
+	
+	public OrderItemPK(Order order, Product product) {
+		super();
+		this.order = order;
+		this.product = product;
+	}
 
 	public Order getOrder() {
 		return order;
@@ -38,11 +46,7 @@ public class OrderItemPK implements Serializable {
 		this.product = product;
 	}
 
-	public OrderItemPK(Order order, Product product) {
-		super();
-		this.order = order;
-		this.product = product;
-	}
+
 
 	@Override
 	public int hashCode() {
